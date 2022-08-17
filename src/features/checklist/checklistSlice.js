@@ -26,11 +26,24 @@ export const checklistSlice = createSlice({
 			const { index, text } = action.payload
 			state.listItems[index].text = text
 		},
+		removeItem: (state, action) => {
+			state.listItems.splice(action.payload, 1)
+		},
+		insertNewItem: (state, action) => {
+			const index = action.payload
+			state.listItems.splice(index, 0, { text: '', checked: false })
+		},
 	},
 })
 
 export const checklist = (state) => state.checklist
-export const { toggleItem, addItem, updateListName, editItem } =
-	checklistSlice.actions
+export const {
+	toggleItem,
+	addItem,
+	updateListName,
+	editItem,
+	removeItem,
+	insertNewItem,
+} = checklistSlice.actions
 
 export default checklistSlice.reducer

@@ -1,24 +1,32 @@
+import React, { useEffect, useRef, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import styles from './Checklist.module.css'
 import {
 	checklist,
 	toggleItem,
 	addItem,
 	updateListName,
 	editItem,
+	removeItem,
+	insertNewItem,
 } from './checklistSlice'
-import styles from './Checklist.module.css'
-import { useState } from 'react'
 
 const Checklist = () => {
 	const { listName } = useSelector(checklist)
 	const dispatch = useDispatch()
+
+	const handleListNameChange = (e) => {
+		const trimmedText = e.target.value.trim()
+		dispatch(updateListName(e.target.value))
+		document.title = `pinklst - ${trimmedText}`
+	}
 
 	return (
 		<div className={styles.Checklist}>
 			<input
 				type='text'
 				value={listName}
-				onChange={(e) => dispatch(updateListName(e.target.value))}
+				onChange={(e) => handleListNameChange(e)}
 				placeholder='list name'
 			/>
 			<List />
@@ -29,46 +37,86 @@ const Checklist = () => {
 
 const List = () => {
 	const { listItems } = useSelector(checklist)
+	const [indexToFocus, setIndexToFocus] = useState(null)
 
 	const listItemCount = Object.keys(listItems).length
-
 	const list = Object.entries(listItems).map(([index, { text, checked }]) => {
 		const backgroundShade = (listItemCount - index) / listItemCount
 
 		return (
 			<ListItem
-				index={index}
-				text={text}
-				checked={checked}
-				backgroundShade={backgroundShade}
+				{...{
+					index,
+					text,
+					checked,
+					backgroundShade,
+					indexToFocus,
+					setIndexToFocus,
+				}}
 				key={index}
 			/>
 		)
 	})
 
-	return <div>{list}</div>
+	return <div className={styles.List}>{list}</div>
 }
 
-const ListItem = ({ index, text, checked, backgroundShade }) => {
+const ListItem = ({
+	index,
+	text,
+	checked,
+	backgroundShade,
+	indexToFocus,
+	setIndexToFocus,
+}) => {
 	const dispatch = useDispatch()
+	const textRef = useRef()
 
-	const handleClick = () => {
-		dispatch(toggleItem(index))
+	const handleKeyDown = ({ key }) => {
+		if (key === 'Enter' && text.length > 0) {
+			const indexOfNewItem = Number(index) + 1
+			dispatch(insertNewItem(indexOfNewItem))
+			setIndexToFocus(indexOfNewItem)
+		} else if (key === 'Escape') {
+			textRef.current.blur()
+		}
 	}
+
+	const handleBlur = () => {
+		if (text.length === 0) {
+			dispatch(removeItem(index))
+		}
+	}
+
+	useEffect(() => {
+		if (indexToFocus === Number(index)) {
+			textRef.current.focus()
+			setIndexToFocus(null)
+		}
+	}, [index, indexToFocus, setIndexToFocus])
 
 	return (
 		<div
 			className={styles.ListItem}
 			style={{ backgroundColor: `rgba(255, 214, 220, ${backgroundShade})` }}
+			onBlur={handleBlur}
 		>
-			<input type='checkbox' checked={checked} readOnly onClick={handleClick} />
+			<input
+				type='checkbox'
+				checked={checked}
+				readOnly
+				onClick={() => dispatch(toggleItem(index))}
+			/>
 			<input
 				type='text'
 				disabled={checked}
 				className={checked ? styles.checkedOff : ''}
+				onKeyDown={handleKeyDown}
 				value={text}
+				ref={textRef}
 				onChange={(e) => dispatch(editItem({ index, text: e.target.value }))}
 			/>
+			<button onClick={() => dispatch(removeItem(index))}>✕</button>
 		</div>
 	)
 }

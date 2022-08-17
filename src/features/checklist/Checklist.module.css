@@ -19,18 +19,15 @@
 	text-underline-offset: 0.5rem;
 }
 
+.List {
+	border-radius: 0.5rem;
+	overflow: hidden;
+}
+
 .ListItem {
 	display: grid;
-	grid-template-columns: 1.3rem 1fr;
+	grid-template-columns: 1.3rem 1fr 1.3rem;
 	padding: 0.5rem 1rem;
-}
-
-.ListItem:first-of-type {
-	border-radius: 0.5rem 0.5rem 0 0;
-}
-
-.ListItem:last-of-type {
-	border-radius: 0 0 0.5rem 0.5rem;
 }
 
 .ListItem > input[type='checkbox'] {
@@ -45,6 +42,7 @@
 	margin: 0 0.5rem;
 	background-color: transparent;
 	border: none;
+	width: 100%;
 }
 
 .ListItem > input[type='text']:focus {
@@ -52,6 +50,20 @@
 	border-bottom: 1px solid rgba(0, 0, 0, 0.5);
 	padding-bottom: 2px;
 	margin-bottom: 5px;
+}
+
+.ListItem > button {
+	background-color: transparent;
+	border: none;
+	font-size: 1.1rem;
+	opacity: 0;
+	transition: opacity 0.15s;
+	cursor: pointer;
+	user-select: none;
+}
+
+.ListItem:hover > button {
+	opacity: 1;
 }
 
 .checkedOff {
