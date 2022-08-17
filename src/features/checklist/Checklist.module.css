@@ -1,0 +1,97 @@
+.Checklist {
+	max-width: MIN(80vw, 900px);
+	margin: 0 auto;
+	padding: 2rem;
+}
+
+.Checklist > input {
+	font-size: 3em;
+	font-weight: lighter;
+	border: none;
+	width: 100%;
+	text-align: center;
+	padding: 0.5em;
+}
+
+.Checklist > input:focus {
+	outline: none;
+	text-decoration: 3px underline pink;
+	text-underline-offset: 0.5rem;
+}
+
+.ListItem {
+	display: grid;
+	grid-template-columns: 1.3rem 1fr;
+	padding: 0.5rem 1rem;
+}
+
+.ListItem:first-of-type {
+	border-radius: 0.5rem 0.5rem 0 0;
+}
+
+.ListItem:last-of-type {
+	border-radius: 0 0 0.5rem 0.5rem;
+}
+
+.ListItem > input[type='checkbox'] {
+	cursor: pointer;
+	transform: scale(1.4);
+}
+
+.ListItem > input[type='text'] {
+	text-align: left;
+	padding: 0.5rem;
+	font-size: 1.5rem;
+	margin: 0 0.5rem;
+	background-color: transparent;
+	border: none;
+}
+
+.ListItem > input[type='text']:focus {
+	outline: none;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+	padding-bottom: 2px;
+	margin-bottom: 5px;
+}
+
+.checkedOff {
+	text-decoration: line-through;
+	color: rgba(0, 0, 0, 0.3);
+}
+
+.NewItemEntry {
+	display: grid;
+	grid-template-columns: 1fr 3rem;
+	padding: 0.5rem;
+}
+
+.NewItemEntry > button {
+	background-color: pink;
+	border: none;
+	cursor: pointer;
+	border-radius: 50%;
+	width: 2.2rem;
+	height: 2.2rem;
+	font-size: 1.2rem;
+	justify-self: center;
+	align-self: center;
+	text-align: center;
+	transition: transform 0.15s;
+}
+
+.NewItemEntry > button:hover {
+	transform: scale(1.1);
+}
+
+.NewItemEntry > input {
+	font-size: 1.5rem;
+	padding: 0.5rem 1rem;
+	display: block;
+	width: 100%;
+	border: none;
+	border-bottom: 2px solid #ccc;
+}
+
+.NewItemEntry > input:focus {
+	outline: none;
+}
