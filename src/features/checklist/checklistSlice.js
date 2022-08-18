@@ -3,8 +3,8 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
 	listName: '',
 	listItems: [
-		{ text: 'list item', checked: false },
-		{ text: 'another list item', checked: false },
+		// { text: 'list item', checked: false },
+		// { text: 'another list item', checked: false },
 	],
 }
 
