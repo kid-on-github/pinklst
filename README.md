@@ -1,7 +1,7 @@
 ![checkmark logo](./public/logo192.png)
 # [pinklst.com](https://pinklst.com/)
 
-This is an over-engineered checklist webapp used as a testing ground for learning new things during my free/personal development time at work.
+This is an over-engineered checklist web app used as a testing ground for learning new things during my free/personal development time at work.
 
 ### Things learned/experimented with so far:
 
