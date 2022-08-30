@@ -18,7 +18,7 @@ const Checklist = () => {
 	const handleListNameChange = (e) => {
 		const trimmedText = e.target.value.trim()
 		dispatch(updateListName(e.target.value))
-		document.title = `pinklst - ${trimmedText}`
+		document.title = trimmedText ? `pinklst - ${trimmedText}` : 'pinklst'
 	}
 
 	return (
