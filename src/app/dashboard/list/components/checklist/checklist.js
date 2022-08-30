@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import styles from './Checklist.module.css'
+import styles from './checklist.module.css'
 import {
 	checklist,
 	toggleItem,

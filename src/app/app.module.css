@@ -1,0 +1,31 @@
+.App {
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	background: pink;
+}
+
+h1 {
+	color: white;
+	font-size: 4rem;
+	font-weight: lighter;
+}
+
+a {
+	text-decoration: none;
+	background-color: white;
+	padding: 1rem 1.5rem;
+	border-radius: 0.5rem;
+	cursor: pointer;
+	color: MediumVioletRed;
+	font-size: 1.2rem;
+	font-weight: bold;
+	transition: all 0.15s ease-in-out;
+}
+
+a:hover {
+	background-color: MediumVioletRed;
+	color: white;
+}

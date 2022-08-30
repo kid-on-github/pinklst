@@ -1,0 +1,8 @@
+.Dashboard {
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	background: pink;
+}
